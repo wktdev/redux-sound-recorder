@@ -1,0 +1,14 @@
+for each recorded track(called a soundClip)  capture pause point relative to song: song.currentTime();
+
+snapshot this value in the soundClips object as "pauseResumePoint";
+
+When song resumes playback soundClip from that value.
+
+
+
+
+write function to add soundClip cue values.
+if cue value is less than the current song playback point then don't included 
+soundClip in cue loop.
+
+Invoke this function on every play instance.
