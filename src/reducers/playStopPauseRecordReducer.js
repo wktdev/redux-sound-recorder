@@ -107,7 +107,7 @@ export default function playToggle(state = initialState, action) {
 
         } else if (state.isStopped) {
             song.play(0, 1, 0.1) //___________If stopped then playback from beginning of song
-
+             song.clearCues();
             state.recordedTracks.map((val, index) => {
 
                 if (val.scheduledToPlay) {
