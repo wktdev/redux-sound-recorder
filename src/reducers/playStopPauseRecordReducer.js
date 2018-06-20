@@ -127,7 +127,8 @@ export default function playToggle(state = initialState, action) {
 
 
         } else if (state.isPlaying) {
-            // do nothing
+            
+            return Object.assign({}, state)
         }
     }
 
