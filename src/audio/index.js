@@ -11,7 +11,7 @@ var p5temp = function(sketch) {
     sketch.preload = function() { // @preload is required by P5.js
         audioContext = sketch.getAudioContext();
         sketch.soundFormats('mp3', 'wav');
-        song = sketch.loadSound('./song.wav');
+        song = sketch.loadSound('./song.mp3');
         console.log(song);
         console.log(audioContext.currentTime);
     }
