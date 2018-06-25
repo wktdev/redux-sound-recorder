@@ -22,8 +22,10 @@ const initialState = {
 
 
 function cueSoundClips(state){
+    console.log("CUEING OUTER");
     state.recordedTracks.map((val)=>{
         if(val.time > song.currentTime()){
+            console.log("CUEING INNER");
             let result = song.addCue(val.time, () => { // @ ps5 cue sounds to play
                     val.soundClip.play()
                 });
@@ -313,35 +315,38 @@ export default function playToggle(state = initialState, action) {
 
     if (action.type === "TOGGLE_TRACK_PLAYBACK") {
 
-  
+        song.clearCues()
 
         let soundClipPlaybackState = state.recordedTracks.map((val, index) => {
-            
+           
             if (index === action.trackNumber) {
 
                 val.scheduledToPlay = val.scheduledToPlay === true ? false : true
-                  console.log(song.currentTime());
-                  console.log("val.time is: " + val.time);
-                  console.log("state.timeStamp.pauseTime is: " + state.timeStamp.pauseTime);
 
-                if (val.scheduledToPlay && val.time > state.timeStamp.pauseTime) {
-                    let result = song.addCue(val.time, () => { // @ ps5 cue sounds to play
-                        val.soundClip.play()
-                    });
-                }
 
-                if (!val.scheduledToPlay) {
-
+                if(!val.scheduledToPlay){
                     val.soundClip.stop()
                 }
 
-                return val
+              return val
+
 
             } else {
 
-                return val
+             return val
             }
         });
+
+        soundClipPlaybackState.map((val,index)=>{
+            if(val.scheduledToPlay){
+                 song.addCue(val.time, () => { // @ ps5 cue sounds to play
+                    val.soundClip.play()
+                });
+            }
+            
+
+        })
+ 
 
 
 
