@@ -86,11 +86,19 @@ export default function playToggle(state = initialState, action) {
 
             let allSoundClips = state.recordedTracks.map((val) => {
 
-                if(val.pauseResumePoint){
-                    val.soundClip.play(0,1,1,val.pauseResumePoint)
+                if(val.pauseResumePoint && val.scheduledToPlay){
+                    val.soundClip.play(0,1,1,val.pauseResumePoint) 
+                    /*_____________________________________________
+                        
+                        It picks up where it left off even if you pause, uncheck, play, pause, check
+
+
+
+                    ________________________________________________*/
                     val.pauseResumePoint = undefined;
                     return val
                 }else{
+
                     return val
                 }
 
@@ -192,7 +200,9 @@ export default function playToggle(state = initialState, action) {
                 isPlaying: true,
                 isStopped: false,
                 isRecording: false,
-                isPaused: true
+                isPaused: true,
+                timeStamp: { pauseTime: song.currentTime()}
+
 
 
             })
@@ -315,7 +325,6 @@ export default function playToggle(state = initialState, action) {
 
     if (action.type === "TOGGLE_TRACK_PLAYBACK") {
 
-        song.clearCues()
 
         let soundClipPlaybackState = state.recordedTracks.map((val, index) => {
            
@@ -323,30 +332,21 @@ export default function playToggle(state = initialState, action) {
 
                 val.scheduledToPlay = val.scheduledToPlay === true ? false : true
 
-
                 if(!val.scheduledToPlay){
+                    val.pauseResumePoint = undefined;
                     val.soundClip.stop()
                 }
 
               return val
 
-
             } else {
 
              return val
             }
+
         });
 
-        soundClipPlaybackState.map((val,index)=>{
-            if(val.scheduledToPlay){
-                 song.addCue(val.time, () => { // @ ps5 cue sounds to play
-                    val.soundClip.play()
-                });
-            }
-            
-
-        })
- 
+  
 
 
 
