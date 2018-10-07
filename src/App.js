@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Controls from './components/Controls';
+import Controls from './containers/ControlsContainer';
 import { createStore } from 'redux';
 import { Provider } from "react-redux";
 import combinedReducers from "./reducers"
