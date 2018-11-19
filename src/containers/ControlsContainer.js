@@ -18,14 +18,16 @@ const mapStateToProps = state =>({
 });
 
 
+const mapDispatchToProps = ((dispatch)=>{
+  return bindActionCreators({
+    playAction,
+    pauseAction,
+    stopAction,
+    recordAction,
+    toggleTrackPlaybackAction
 
-const mapDispatchToProps = (dispatch) => bindActionCreators({
-  playAction,
-  pauseAction,
-  stopAction,
-  recordAction,
-  toggleTrackPlaybackAction
-},dispatch);
+  },dispatch)
+})
 
 
 export default connect(mapStateToProps, mapDispatchToProps)(Playbutton);

@@ -6,11 +6,18 @@ import React, { Component } from 'react';
 class Playbutton extends Component {
 	render(){
 
-     console.log(this.props);
+  
+
+
      let tracksRecorded = this.props.recordedTracks.map((val,index)=>{
         return (
                   <li key={index}>
-                    <span>Time: {val.time}</span> <span> PLAY: <input type="checkbox"onChange={()=>this.props.toggleTrackPlaybackAction(index)}/> </span>
+                    <span>
+                      Time: {val.time}
+                    </span> 
+                    <span> 
+                      PLAY: <input type="checkbox"onChange={()=>this.props.toggleTrackPlaybackAction(index)}/> 
+                    </span>
                   </li>
               )
      })

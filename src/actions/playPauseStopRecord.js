@@ -1,5 +1,5 @@
 export const playAction = function(){
-	console.log("Play action test" {type: "PLAY"});
+
 	return {type: "PLAY"}
 };
 
